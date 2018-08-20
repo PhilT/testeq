@@ -33,7 +33,9 @@ function testCount (count) {
   return `1..${count}`
 }
 
-const imports = load(readdirSync('tests'))
+const endsWithMjs = path => path.endsWith('.mjs')
+const files = readdirSync('tests').filter(endsWithMjs)
+const imports = load(files)
 imports.then(tests => {
   console.log(testCount(tests.length))
   const results = run(tests)
