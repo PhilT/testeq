@@ -23,10 +23,11 @@ export function load (fileList) {
 }
 
 export function run (tests) {
-  return Object.keys(tests[0]).map((test, i) => {
-    const result = tests[0][test]()
-    return `${result[0]} ${i + 1} ${test}`
+  const results = Object.entries(tests[0]).map(([name, func], i) => {
+    return `${func()} ${i + 1} ${name}`
   })
+
+  return [testCount(results.length), ...results]
 }
 
 function testCount (count) {
@@ -37,7 +38,6 @@ const endsWithMjs = path => path.endsWith('.mjs')
 const files = readdirSync('tests').filter(endsWithMjs)
 const imports = load(files)
 imports.then(tests => {
-  console.log(testCount(tests.length))
   const results = run(tests)
   results.forEach(result => { console.log(result) })
 })

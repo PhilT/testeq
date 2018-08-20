@@ -3,6 +3,10 @@ import { run, assert, equal } from '../index.mjs'
 const exampleTests = [{
   'example test': () => {
     return assert(true)
+  },
+
+  'second example': () => {
+    return ['ok']
   }
 }]
 
@@ -14,7 +18,7 @@ export default () => {
 
     'run runs the test suite': () => {
       const result = run(exampleTests)
-      return assert(result.join() === 'ok 1 example test')
+      return assert(result.join('\n') === '1..2\nok 1 example test\nok 2 second example')
     },
 
     'equal returns "ok" for matching parameters': () => {
