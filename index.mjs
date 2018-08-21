@@ -1,4 +1,5 @@
 import { readdirSync } from 'fs'
+import { flat, shallowFlat, mapObjects } from './lib/util.mjs'
 
 export function assert (expression) {
   return expression ? ['ok'] : ['not ok']
@@ -13,6 +14,10 @@ export function equal (expected, actual) {
   ]
 }
 
+export function deepEqual (expected, actual) {
+  return equal(JSON.stringify(expected), JSON.stringify(actual))
+}
+
 export function load (fileList) {
   const imports = fileList.map(async path => {
     const module = await import(`./tests/${path}`)
@@ -22,22 +27,25 @@ export function load (fileList) {
   return Promise.all(imports)
 }
 
-export function run (tests) {
-  const results = Object.entries(tests[0]).map(([name, func], i) => {
-    return `${func()} ${i + 1} ${name}`
+export function run (files) {
+  const results = shallowFlat(mapObjects(files)).map(([name, func], i) => {
+    const [result, ...diag] = func()
+    return [`${result} ${i + 1} ${name}`, ...diag]
   })
 
-  return [testCount(results.length), ...results]
+  return [testCount(results.length), ...flat(results)]
 }
 
 function testCount (count) {
   return `1..${count}`
 }
 
+// run fn for each element
+// TODO: Move these to util
 const endsWithMjs = path => path.endsWith('.mjs')
 const files = readdirSync('tests').filter(endsWithMjs)
 const imports = load(files)
-imports.then(tests => {
-  const results = run(tests)
-  results.forEach(result => { console.log(result) })
+imports.then(files => {
+  const results = run(files)
+  console.log(results.join('\n'))
 })
