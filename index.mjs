@@ -1,14 +1,15 @@
 import { readdirSync } from 'fs'
 import { flat, shallowFlat, mapObjects } from './lib/util.mjs'
+import { OK, NOTOK } from './lib/colours.mjs'
 
 export function assert (expression) {
-  return expression ? ['ok'] : ['not ok']
+  return expression ? [OK] : [NOTOK]
 }
 
 export function equal (expected, actual) {
   const result = expected === actual
-  return result ? ['ok'] : [
-    'not ok',
+  return result ? [OK] : [
+    NOTOK,
     `# Expected: ${expected}`,
     `#   Actual: ${actual}`
   ]
@@ -45,6 +46,8 @@ function testCount (count) {
 const endsWithMjs = path => path.endsWith('.mjs')
 const files = readdirSync('tests').filter(endsWithMjs)
 const imports = load(files)
+
+// SIDE EFFECTS!!
 imports.then(files => {
   const results = run(files)
   console.log(results.join('\n'))
