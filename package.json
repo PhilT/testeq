@@ -3,12 +3,15 @@
   "version": "0.1.0",
   "description": "Stupid simple testing library",
   "main": "index.mjs",
+  "bin": {
+    "testeq": "./bin/testeq.mjs"
+  },
   "directories": {
     "lib": "lib",
     "test": "tests"
   },
   "scripts": {
-    "test": "node --experimental-modules index.mjs"
+    "test": "node --experimental-modules bin/testeq.mjs"
   },
   "repository": {
     "type": "git",

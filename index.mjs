@@ -1,4 +1,3 @@
-import { readdirSync } from 'fs'
 import { flat, shallowFlat, mapObjects } from './lib/util.mjs'
 import { ok } from './lib/colours.mjs'
 
@@ -41,14 +40,3 @@ function testCount (count) {
   return `1..${count}`
 }
 
-// run fn for each element
-// TODO: Move these to util
-const endsWithMjs = path => path.endsWith('.mjs')
-const files = readdirSync('tests').filter(endsWithMjs)
-const imports = load(files)
-
-// SIDE EFFECTS!!
-imports.then(files => {
-  const results = run(files)
-  console.log(results.join('\n'))
-})
