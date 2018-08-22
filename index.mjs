@@ -1,15 +1,15 @@
 import { readdirSync } from 'fs'
 import { flat, shallowFlat, mapObjects } from './lib/util.mjs'
-import { OK, NOTOK } from './lib/colours.mjs'
+import { ok } from './lib/colours.mjs'
 
 export function assert (expression) {
-  return expression ? [OK] : [NOTOK]
+  return [!!expression]
 }
 
 export function equal (expected, actual) {
   const result = expected === actual
-  return result ? [OK] : [
-    NOTOK,
+  return result ? [true] : [
+    false,
     `# Expected: ${expected}`,
     `#   Actual: ${actual}`
   ]
@@ -30,8 +30,8 @@ export function load (fileList) {
 
 export function run (files) {
   const results = shallowFlat(mapObjects(files)).map(([name, func], i) => {
-    const [result, ...diag] = func()
-    return [`${result} ${i + 1} ${name}`, ...diag]
+    const [success, ...diag] = func()
+    return [`${ok(success)} ${i + 1} ${name}`, ...diag]
   })
 
   return [testCount(results.length), ...flat(results)]
