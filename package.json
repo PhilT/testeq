@@ -1,0 +1,29 @@
+{
+  "name": "testeq",
+  "version": "0.1.0",
+  "description": "Stupid simple testing library",
+  "main": "index.mjs",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node --experimental-modules index.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhilT/testeq.git"
+  },
+  "keywords": [
+    "Testing",
+    "tap",
+    "tape",
+    "TDD"
+  ],
+  "author": "Phil A Thompson",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/PhilT/testeq/issues"
+  },
+  "homepage": "https://github.com/PhilT/testeq#readme"
+}
