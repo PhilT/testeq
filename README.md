@@ -41,7 +41,7 @@ Run all .mjs module files under `tests/` folder:
 
 Specify `--no-color` if you get garbled output or want to plug it into a TAP parser.
 
-#### all_sorts_test.js
+#### all_sorts_test.mjs
 
     import { assert, equal } from '../index.mjs'
 

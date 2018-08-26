@@ -1,7 +1,7 @@
 #!/bin/sh
 ":" //# comment; exec /usr/bin/env node --experimental-modules "$0" "$@"
 import { readdirSync } from 'fs'
-import { load, run } from '../index.mjs'
+import { load, run } from '../lib/runner'
 
 const endsWithMjs = path => path.endsWith('.mjs')
 const files = readdirSync('tests').filter(endsWithMjs)

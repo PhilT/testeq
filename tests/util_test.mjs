@@ -1,5 +1,5 @@
-import { equal, deepEqual } from '../index.mjs'
-import { mapObjects, flat, shallowFlat } from '../lib/util.mjs'
+import { equal, deepEqual } from '../lib/assertions'
+import { mapObjects, flat, shallowFlat } from '../lib/util'
 
 export default () => {
   return {
