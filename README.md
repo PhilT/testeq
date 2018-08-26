@@ -1,4 +1,4 @@
-## testeq https://travis-ci.org/PhilT/testeq.svg?branch=master
+## testeq [![Build Status](https://travis-ci.org/PhilT/testeq.svg?branch=master)](https://travis-ci.org/PhilT/testeq)
 
 A stupid simple test library.
 
