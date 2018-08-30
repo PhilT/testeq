@@ -31,6 +31,7 @@ A stupid simple test library.
 
 * Handle async
 * Other stuff as needed
+* Stream output rather than waiting until the end (Observable?)
 * May support TAP version 13 at some point
 
 ## Usage
